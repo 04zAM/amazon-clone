@@ -1,25 +1,41 @@
 import React from "react";
 import "./Product.css";
+import { useStateValue } from "./StateProvider";
 
-function Product() {
+function Product({ id, title, price, image, rating }) {
+  const [state, dispatch] = useStateValue();
+  const addToBasket = () => {
+    // envia el producto a la capa de datos
+    dispatch({
+      type: "ADD_TO_BASKET",
+      item: {
+        id,
+        title,
+        image,
+        price,
+        rating,
+      },
+    });
+  };
+
   return (
     <div className="product">
       <div className="product__info">
-        <p className="product__name">Titulo</p>
+        <p className="product__name">{title}</p>
         <p className="product__price">
           <small>$</small>
-          <strong>100</strong>
+          <strong>{price}</strong>
         </p>
         <div className="product__rating">
-          <p>⭐</p>
+          {Array(rating)
+            .fill()
+            .map((_, i) => (
+              <p>⭐</p>
+            ))}
         </div>
       </div>
-      <img
-        alt="product__img"
-        src="https://www.warmionline.com/quito/2895-large_default/set-de-10-focos-led-para-espejo.jpg"
-        className="product__image"
-      />
-      <button>Agregar al Carrito</button>
+      <img alt="product__img" src={image} className="product__image" />
+      <button onClick={addToBasket}>Agregar al Carrito</button>
     </div>
   );
 }
