@@ -6,8 +6,11 @@
 }
 
 .checkout__ad {
-  width: 100%;
-  margin-top: 10px;
+  width: 75%; 
+  height: 50%; 
+  object-fit: cover;
+  object-position: 20% 5%;
+  margin-top: 5px;
 }
 
 .checkout__title {
